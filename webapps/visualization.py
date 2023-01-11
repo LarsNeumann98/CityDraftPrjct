@@ -32,8 +32,8 @@ def main():
     scene = THREE.Scene.new()
     back_color = THREE.Color.new(0,0,0)
     scene.background = back_color
-    camera = THREE.PerspectiveCamera.new(60, window.innerWidth/window.innerHeight, 0.1, 1000)
-    camera.position.z = 100
+    camera = THREE.PerspectiveCamera.new(100, window.innerWidth/window.innerHeight, 0.1, 1000)
+    camera.position.z = 200
     scene.add(camera)
 
     # Graphic Post Processing
@@ -70,6 +70,7 @@ def main():
     BaseShape1 = [np.array([0, 0]), np.array([40, 40]), np.array([40, 0])] 
     #R
     G(BaseShape1)
+    
     BaseShape2 = [np.array([120, 0]), np.array([40, 0]), np.array([40, 40]), np.array([120, 40])] 
     #g
     B(BaseShape2)
@@ -133,12 +134,8 @@ def main():
     render()
     
 def G(arraypoints):
-    print(arraypoints)
     arraylines = generateLinesNum(arraypoints)
-    print(arraylines)
-    
     Plotboundary = transferNumLines(arraylines)
-
     draw_system(Plotboundary)
  
 
@@ -165,7 +162,7 @@ def G(arraypoints):
     makeOffsetPoly(Xcoordinates,Ycoordinates, 2)
  
     xCoordAr, yCoordAr = makeFloatfromPoint(Xcoordinates,Ycoordinates)
-    greenery(xCoordAr,yCoordAr,THREE.Color.new("rgb(113,141,70)"))
+    greenery(xCoordAr,yCoordAr,THREE.Color.new("rgb(112,128,47)"))
 
 def P(arraypoints):
     arraylines = generateLinesNum(arraypoints)
@@ -198,7 +195,7 @@ def P(arraypoints):
     makeOffsetPoly(Xcoordinates,Ycoordinates, 2)
  
     xCoordAr, yCoordAr = makeFloatfromPoint(Xcoordinates,Ycoordinates)
-    greenery(xCoordAr,yCoordAr,THREE.Color.new("rgb(40,40,40)"))
+    greenery(xCoordAr,yCoordAr,THREE.Color.new("rgb(100,100,100)"))
 
 def B(arraypoints):
     arraylines = generateLinesNum(arraypoints)
@@ -248,50 +245,6 @@ def R(arraypoints):
     # BlockPermiterLines = transferNumLines(BlockPermiterLines)
     # draw_system(BlockPermiterLines)
     generateShaperesidential(xCoordAr,yCoordAr,THREE.Color.new(255, 255, 255))
-  
-def I(arraypoints):
-    arraylines = generateLinesNum(arraypoints)
-    Plotboundary = transferNumLines(arraylines)
-    draw_system(Plotboundary)
-
-    #generate Baseshape of x and y coordinates
-    global Xcoordinates, Ycoordinates
-    Xcoordinates = []
-    Ycoordinates = []
-
-    for m in range(len(arraypoints)):
-        Xcoordinates.append(arraypoints[m][0])
-        Ycoordinates.append(arraypoints[m][1])
-       
- 
-    #greenery(Xcoordinates,Ycoordinates)
-    #offsetting Shape returns newX, newY
-  
-    makeOffsetPoly(Xcoordinates,Ycoordinates, 4)
-
-    #generate greenery for value G
-
-
-    #convert x and y lists 
-    xCoordAr, yCoordAr = makeFloatfromPoint(newX,newY)
-   
-    
-    #generate list of lines
-    IntersectionLines = ListPoint2Lines(newX,newY)
-     #Transferring NumPy-Lines into Three.js for visualization    
-    IntersectionLines = transferNumLines(IntersectionLines)
-    draw_system(IntersectionLines)
-
-    #check distance of intersectes points and offsets plot if possible
-    # if offset_valid_plots(newX, newY) == True:
-    #     makeOffsetPoly(newX,newY, 10)
-    
-    
-    # BlockPermiterLines = ListPoint2Lines(newX,newY)
-    #  #Transferring NumPy-Lines into Three.js for visualization    
-    # BlockPermiterLines = transferNumLines(BlockPermiterLines)
-    # draw_system(BlockPermiterLines)
-    generateShape(xCoordAr,yCoordAr,THREE.Color.new(255, 255, 255))
 
 def I(arraypoints):
     arraylines = generateLinesNum(arraypoints)
@@ -332,7 +285,7 @@ def I(arraypoints):
     #  #Transferring NumPy-Lines into Three.js for visualization    
     # BlockPermiterLines = transferNumLines(BlockPermiterLines)
     # draw_system(BlockPermiterLines)
-    generateShape(xCoordAr,yCoordAr,THREE.Color.new(255, 255, 255))
+    generateShape(xCoordAr,yCoordAr,THREE.Color.new(200, 200, 200))
 
 def C(arraypoints):
     
@@ -719,19 +672,14 @@ def generateShapeblock(xCordsArray,yCordsArray, color, xCordsHoles, yCordsHoles,
         scene.add(mesh2)
 
 def greenery(xCordsArray,yCordsArray,colorgreen):
-    #xCordsArray = xCordsAr2.tolist()
-    #yCordsArray = yCordsAr2.tolist()
+
     shape_Green = THREE.Shape.new()
-    #shape_Green.moveTo(0,0)
-    #shape_Green.lineTo(10,50)
-    #shape_Green.lineTo(40,70)
-    #shape_Green.lineTo(60,0)
+
     for i in range(len(xCordsArray)):
         if i == 0 :
             #("moveTo",xCordsArray[i], yCordsArray[i])
             shape_Green.moveTo (xCordsArray[i], yCordsArray[i])
         else: 
-            #print("lineTo",xCordsArray[i], yCordsArray[i])
             shape_Green.lineTo(xCordsArray[i], yCordsArray[i])     
     geometrygreenery = THREE.ShapeGeometry.new(shape_Green)
     
@@ -740,7 +688,6 @@ def greenery(xCordsArray,yCordsArray,colorgreen):
     meshgreen_material.color = colorgreen
 
     meshgreen = THREE.Mesh.new(geometrygreenery, meshgreen_material)
-    #meshgreen.add(THREE.BoxHelper.new(meshgreen))
     scene.add(meshgreen)
 
 
