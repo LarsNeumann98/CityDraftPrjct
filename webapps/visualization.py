@@ -32,7 +32,7 @@ def main():
     scene = THREE.Scene.new()
     back_color = THREE.Color.new(0,0,0)
     scene.background = back_color
-    camera = THREE.PerspectiveCamera.new(100, window.innerWidth/window.innerHeight, 0.1, 1000)
+    camera = THREE.PerspectiveCamera.new(80, window.innerWidth/window.innerHeight, 0.1, 10000)
     camera.position.z = 200
     scene.add(camera)
 
