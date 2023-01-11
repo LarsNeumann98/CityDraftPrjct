@@ -27,9 +27,31 @@
 
         <main id="main-doc">
             <h1>
-           PLOT ASSIGNMENT
+            DISINTEGRATING CUBE
             </h1>
             <section class="main-section" id="description">
+                <header>
+                    Project Description
+                </header>
+                <p>The blue function takes a Set of Lines as an Input and searches for all "plots" enclosed by lines. 
+			It does that by following a line starting from any point and always moving clockwise to the next connecting line.<br />
+			If there is more then one line connecting it will turn left for finding the outline, and continue to do so until it reaches a visited point again.
+			And it will turn right, starting from any outline, to find an enclosed plot, and continue to turn right until it reaches a visited point again.<br />
+			Then the parts of the enclosed plot that were part of the Outline are removed for the new Input, until all Plots are found. Those will be passed on to
+			the red function.<br /><br />
+			The green function searches for the neighbouring plots, it does that by looking for all the plots that share 2 or more coordinates with the current plot.
+			it outputs the result in a List like this [PlotNr[Neighbouring Plots]] and passes it on to the red function.<br /><br />
+			The red function first declares a list of possible values and their respective weight and also declares the count of each value as 0. Then it selects the first
+			key in the dictionary and assigns a random value chosen from the list of possible values to that key in the dictionary. <br />
+			The function then loops through the keys in the dictionary and for each key, it loops through its corresponding list of neighbors. For each neighbor, 
+			it checks the value assigned to that neighbor and based on that it may remove the certain values from the list of possible values.<br />
+			If a certain value reaches certain threshold, the function may remove that from possible values.
+			The function then assigns random value to each key in the dictionary from the possible values (list) but with the updated weight.<br />
+			It also keeps track of the count of each value assigned. The function then returns the modified dictionary with assigned values.
+                   
+                </p>
+
+        
            
 			
 		
@@ -57,7 +79,7 @@
 			    
 			    
                     </p>
-                    <iframe class="responsive-iframe" src="../webapps/webapp_lars.html"></iframe>
+                    <iframe class="responsive-iframe" src="webapps/Plot_Assignment.html"></iframe>
                     <p>
                         <br>
                     </p>
@@ -67,3 +89,18 @@
     </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
