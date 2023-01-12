@@ -81,7 +81,7 @@ def main():
     ILp5_2 = np.array([41,11])
 
 
-    InputLinePoints = [ILp1_1,ILp1_2,ILp2_1,ILp2_2,ILp3_1,ILp3_2,ILp4_1,ILp4_2]
+    InputLinePoints = [ILp1_1,ILp1_2,ILp2_1,ILp2_2,ILp3_1,ILp3_2,ILp4_1,ILp4_2,ILp5_1,ILp5_2]
 
     InputLineLines = []
     count = 0
