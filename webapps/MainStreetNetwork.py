@@ -6,6 +6,7 @@ from pyodide.ffi import create_proxy, to_js
 import math
 # Import NumPy as np
 import numpy as np
+import random
 
 #-----------------------------------------------------------------------
 # USE THIS FUNCTION TO WRITE THE MAIN PROGRAM
@@ -89,10 +90,12 @@ def main():
             InputLineLines.append(CurrentLine)
         else:
             continue
-
+    randomInputLines = InputLineLines.copy()
+    random.shuffle(randomInputLines)
+    
     #-------------Hiermit wird weitergearbeitet!:-----------------------------------------------------------------------------------------------------------------
     #-------------mainStreetNetwork beinhaltet alle generierten Straßen(ungesplittet),BaseShapeLines enthält alle äußeren Begrenzungslinien(ungesplittet)---------
-    mainStreetNetwork = mainStreetGenerator(BaseShapeLines,InputLineLines)
+    mainStreetNetwork = mainStreetGenerator(BaseShapeLines,randomInputLines)
 
     #Aus Straßen und Baseshape gehardcodete Plots und dazugehörige Nachbarn
     Plot1 = [np.array([0,0]),np.array([0,22.08333333]),np.array([67.38502674,50.16042781]),np.array([100,63.75]),np.array([100,0])]
@@ -606,7 +609,7 @@ def mainStreetGenerator(BaseShape,InputLines):
 
         def system(startPoint,dirVec,BaseShape,existingStreets,segmentLength):
             
-            segmentLength += 50
+            segmentLength += 500
             currentStreetSegment = generateStreetSegment(startPoint,dirVec,BaseShape,existingStreets,segmentLength)
             #print ("result system",currentStreetSegment)
             if currentStreetSegment == "noIntersect" and segmentLength <= 500:
