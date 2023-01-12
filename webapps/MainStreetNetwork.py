@@ -77,6 +77,8 @@ def main():
     ILp3_2 = np.array([40,69])
     ILp4_1 = np.array([106,35])
     ILp4_2 = np.array([111,49])
+    ILp5_1 = np.array([41,0])
+    ILp5_2 = np.array([41,11])
 
 
     InputLinePoints = [ILp1_1,ILp1_2,ILp2_1,ILp2_2,ILp3_1,ILp3_2,ILp4_1,ILp4_2]
