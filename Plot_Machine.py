@@ -155,47 +155,54 @@ def random_distribution(dictionary: dict) -> dict:
     respected.
     """
     # Declare the possible values
-    values = ['G', 'C', 'R', 'I', 'P']
+    values = ['L', 'I', 'G', 'O', 'E']
     weights = [20, 20, 20, 20, 20]
-    G_Count=0
-    C_Count=0
-    R_Count=0
+    L_Count=0
     I_Count=0
-    P_Count=0
+    G_Count=0
+    O_Count=0
+    E_Count=0
     
     # Get the first plot in the dictionary
     first_plot = list(dictionary.keys())[0]
 
     # Choose a random value from the list of possible values
-    value = choice(['G', 'C', 'R', 'I', 'P'])
+    value = choice(['L', 'I', 'G', 'O', 'E'])
     VALID_VALUES=[]
     # Assign the random value to the first plot and change possible Neighbor Values accordingly
     dictionary[first_plot]['value'] = value
     combined_plots = {}
     for neighbor in dictionary[first_plot]['neighbours']:
-        if dictionary[first_plot]['value'] == 'R':
+        if dictionary[first_plot]['value'] == 'L':
                         while "I" in values:
                             index= values.index("I")
                             if index < len(values):
                                 values.pop(index)
                                 weights.pop(index)
         elif dictionary[first_plot]['value'] == 'I':
-            while "R" in values:
-                index= values.index("R")
+            while "L" in values:
+                index= values.index("L")
                 if index < len(values):
                     values.pop(index)
                     weights.pop(index)
-            # while "C" in values:
-            #     index= values.index("C")
+            while "E" in values:
+                index= values.index("E")
+                if index < len(values):
+                    values.pop(index)
+                    weights.pop(index)
+        #elif dictionary[first_plot]['value'] == 'G':
+            # while "G" in values:
+            #     index= values.index("G")
             #     if index < len(values):
             #         values.pop(index)
             #         weights.pop(index)
-            while "P" in values:
-                index= values.index("P")
+        if L_Count >= 4:
+            while "L" in values:
+                index= values.index("L")
                 if index < len(values):
                     values.pop(index)
                     weights.pop(index)
-        elif dictionary[first_plot]['value'] == 'P':
+        if I_Count >= 4:
             while "I" in values:
                 index= values.index("I")
                 if index < len(values):
@@ -207,27 +214,15 @@ def random_distribution(dictionary: dict) -> dict:
                 if index < len(values):
                     values.pop(index)
                     weights.pop(index)
-        if C_Count >= 4:
-            while "C" in values:
-                index= values.index("C")
+        if O_Count >= 4:
+            while "O" in values:
+                index= values.index("O")
                 if index < len(values):
                     values.pop(index)
                     weights.pop(index)
-        if R_Count == 1:
-            while "R" in values:
-                index= values.index("R")
-                if index < len(values):
-                    values.pop(index)
-                    weights.pop(index)
-        if I_Count >= 4:
-            while "I" in values:
-                index= values.index("I")
-                if index < len(values):
-                    values.pop(index)
-                    weights.pop(index)
-        if P_Count >= 1:
-            while "P" in values:
-                index= values.index("P")
+        if E_Count >= 1:
+            while "E" in values:
+                index= values.index("E")
                 if index < len(values):
                     values.pop(index)
                     weights.pop(index)
@@ -249,7 +244,23 @@ def random_distribution(dictionary: dict) -> dict:
     
     # Assign a value to the plot, using weighted probability
     
-    value = choices(values, weights=weights, k=1)[0]
+    #value = choices(values, weights=weights, k=1)[0]
+    #Count the Assigned Values
+    if value=="L":
+        L_Count=L_Count+1                    
+        
+    elif value=="I":
+        I_Count=I_Count+1
+        
+    elif value=="G":
+        G_Count=G_Count+1
+        
+    elif value=="O":
+        O_Count=O_Count+1
+        
+    elif value=="E":
+        E_Count=E_Count+1
+    
     
     for i in VALID_VALUES:
                 if i not in VALID_VALUES_NO_DOUBLES:
@@ -272,27 +283,12 @@ def random_distribution(dictionary: dict) -> dict:
     # Assign the value to the plot
     # dictionary[neighbor]['value'] = value
 
-    values = ['G', 'C', 'R', 'I', 'P']
+    values = ['L', 'I', 'G', 'O', 'E']
     weights = [20, 20, 20, 20, 20]
         
     
 
-    #Count the Assigned Values
-    if value=="G":
-        G_Count=G_Count+1                    
-        
-    elif value=="C":
-        C_Count=C_Count+1
-        
-    elif value=="R":
-        R_Count=R_Count+1
-        
-    elif value=="I":
-        I_Count=I_Count+1
-        
-    elif value=="P":
-        P_Count=P_Count+1
-    #print (value)
+    
     # plots_sorted = []
     # for plot in dictionary.keys():
     #     remaining_values = 5 - len(values)
@@ -321,15 +317,15 @@ def random_distribution(dictionary: dict) -> dict:
                     #         if index < len(values):
                     #             values.pop(index)
                     #             weights.pop(index)
-                    if dictionary[neighbor]['value'] == 'R':
+                    if dictionary[neighbor]['value'] == 'L':
                         while "I" in values:
                             index= values.index("I")
                             if index < len(values):
                                 values.pop(index)
                                 weights.pop(index)
                     elif dictionary[neighbor]['value'] == 'I':
-                        while "R" in values:
-                            index= values.index("R")
+                        while "L" in values:
+                            index= values.index("L")
                             if index < len(values):
                                 values.pop(index)
                                 weights.pop(index)
@@ -338,13 +334,25 @@ def random_distribution(dictionary: dict) -> dict:
                         #     if index < len(values):
                         #         values.pop(index)
                         #         weights.pop(index)
-                        while "P" in values:
-                            index= values.index("P")
+                        # while "P" in values:
+                        #     index= values.index("P")
+                        #     if index < len(values):
+                        #         values.pop(index)
+                        #         weights.pop(index)
+                    elif dictionary[neighbor]['value'] == 'E':
+                        while "I" in values:
+                            index= values.index("I")
                             if index < len(values):
                                 values.pop(index)
                                 weights.pop(index)
-                    elif dictionary[neighbor]['value'] == 'P':
-                        while "I" in values:
+                    if L_Count >= 4:
+                        while "L" in values:
+                            index= values.index("L")
+                            if index < len(values):
+                                values.pop(index)
+                                weights.pop(index)
+                    if I_Count >= 4:
+                        while "C" in values:
                             index= values.index("I")
                             if index < len(values):
                                 values.pop(index)
@@ -355,27 +363,15 @@ def random_distribution(dictionary: dict) -> dict:
                             if index < len(values):
                                 values.pop(index)
                                 weights.pop(index)
-                    if C_Count >= 4:
-                        while "C" in values:
-                            index= values.index("C")
+                    if O_Count >= 4:
+                        while "O" in values:
+                            index= values.index("O")
                             if index < len(values):
                                 values.pop(index)
                                 weights.pop(index)
-                    if R_Count == 1:
-                        while "R" in values:
-                            index= values.index("R")
-                            if index < len(values):
-                                values.pop(index)
-                                weights.pop(index)
-                    if I_Count >= 4:
-                        while "I" in values:
-                            index= values.index("I")
-                            if index < len(values):
-                                values.pop(index)
-                                weights.pop(index)
-                    if P_Count >= 1:
-                        while "P" in values:
-                            index= values.index("P")
+                    if E_Count >= 1:
+                        while "E" in values:
+                            index= values.index("E")
                             if index < len(values):
                                 values.pop(index)
                                 weights.pop(index)
@@ -414,7 +410,7 @@ def random_distribution(dictionary: dict) -> dict:
                         combined_plots[plot_num] = (list(combined_values), combined_weights)
                     else:
                         combined_plots[plot_num] = (possible_values, weights)
-            values = ['G', 'C', 'R', 'I', 'P']    ##############################reset weights and Values
+            values = ['L', 'I', 'G', 'O', 'E']    ##############################reset weights and Values
             weights = [20, 20, 20, 20, 20]
                     
             combined_plots_all = {key: value for key, value in combined_plots.items()}################################# A list with all possible values for all Plots
@@ -425,21 +421,26 @@ def random_distribution(dictionary: dict) -> dict:
             sorted_dict = dict(sorted(combined_plots.items(), key=lambda x: len(x[1][0])))
             
             ############### Count the assignment Values
-            if value=="G":  
-                G_Count=G_Count+1                    
-                
-            elif value=="C":
-                C_Count=C_Count+1
-                
-            elif value=="R":
-                R_Count=R_Count+1
+            if value=="L":  
+                L_Count=L_Count+1                    
                 
             elif value=="I":
                 I_Count=I_Count+1
                 
-            elif value=="P":
-                P_Count=P_Count+1
-    # print(G_Count)  
+            elif value=="G":
+                G_Count=G_Count+1
+                
+            elif value=="O":
+                O_Count=O_Count+1
+                
+            elif value=="E":
+                E_Count=E_Count+1
+   
+    print("LCount",L_Count)
+    print("ICount",I_Count)  
+    print("GCount",G_Count)  
+    print("OCount",O_Count)  
+    print("ECount",E_Count)  
     # print(C_Count)     
     # print(R_Count) 
     # print(I_Count) 
@@ -520,7 +521,7 @@ print("Neighbours:",NEIGHBOURS)
 ##########################################################################################
 DICTIONARY = convert_data(NEIGHBOURS)
 DISTRIBUTION=find_solution(DICTIONARY)
-POSSIBLE_CHANGES=random_distribution(DICTIONARY)
-print ("Distribution",DISTRIBUTION[0])
-print ("Possible Changes",POSSIBLE_CHANGES[1])
+#POSSIBLE_CHANGES=random_distribution(DICTIONARY)
+print ("Distribution",DISTRIBUTION)
+#print ("Possible Changes",POSSIBLE_CHANGES[1])
 
